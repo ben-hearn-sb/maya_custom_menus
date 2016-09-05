@@ -1,7 +1,7 @@
 """
 	Author: Ben Hearn
 	Set up maya icon tools and maya custom menus
-	Adds
+	Adds a tearable toolbar and 2 clickable iconswith example scripts attached to them
 """
 
 import maya.OpenMayaUI as apiUI
