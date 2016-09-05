@@ -1,3 +1,9 @@
+"""
+	Author: Ben Hearn
+	Set up maya icon tools and maya custom menus
+	Adds a tearable toolbar and 2 clickable iconswith example scripts attached to them
+"""
+
 import maya.OpenMayaUI as apiUI
 import maya.mel as mel
 from PySide import QtGui, QtCore
@@ -8,13 +14,6 @@ import shiboken
 import os
 
 import maya.cmds as cmds
-
-""" Maya window functions """
-def getMayaWindow():
-	ptr = apiUI.MQtUtil.mainWindow()
-	if ptr is not None:
-		return shiboken.wrapInstance(long(ptr), QtGui.QMainWindow) # PySide command
-		#return sip.wrapinstance(long(ptr), QtGui.QMainWindow) # PyQt command
 
 def getMayaStatusLine():
 	gStatusLine = mel.eval('$temp=$gStatusLine')
@@ -50,7 +49,7 @@ def addToolBarFunction(icon, statusLine, callback):
 	btn.setMinimumSize(btnSize)
 	btn.setMaximumSize(btnSize)
 	btn.setIconSize   (iconSize)
-	btn.pressed.connect(callback)
+	btn.clicked.connect(callback)
 	statusLine.layout().addWidget(btn)
 
 def setupMenuBar():
@@ -80,11 +79,12 @@ def setupMenuBar():
 def setupToolBar():
 	statusLine = getMayaStatusLine()
 
-	currentDir = os.path.dirname(os.path.realpath('__file__'))
-	iconDirectory = currentDir + '/icons'
+	#currentDir = os.path.dirname(os.path.realpath('__file__'))
+	iconDirectory = r'C:\projects\git_projects\maya_custom_menus\icons'
 
-	clickMeIcon  = os.path.join(iconDirectory, 'export.png')
-	thumbsUpIcon = os.path.join(iconDirectory, 'quick_export.png')
+	clickMeIcon  = os.path.join(iconDirectory, 'click_me.png')
+	thumbsUpIcon = os.path.join(iconDirectory, 'thumb_up.png')
+	print thumbsUpIcon
 
 	addToolBarFunction(icon=clickMeIcon,  statusLine=statusLine, callback=clickMe)
 	addToolBarFunction(icon=thumbsUpIcon, statusLine=statusLine, callback=thumbsUp)
