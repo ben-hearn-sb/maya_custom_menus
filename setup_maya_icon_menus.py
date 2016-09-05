@@ -53,7 +53,11 @@ def addToolBarFunction(icon, statusLine, callback):
 	statusLine.layout().addWidget(btn)
 
 def setupMenuBar():
-	""" Sets up a menu bar  """
+	"""
+		Sets up a menu bar
+		Passing in a string representation of our script allows it to be pinnable to our Maya
+		 Ctrl + Shift + click to pin to shelf
+	"""
 
 	# Create a main menu that we will place on the main maya toolbar
 	MAIN_MENU = cmds.menu(label='CUSTOM MENU', parent='MayaWindow', tearOff=True)
